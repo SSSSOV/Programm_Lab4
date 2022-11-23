@@ -30,7 +30,6 @@ public:
 
 	void InfoPC();
 	int Benchmark();
-
 	int Consumption();
 };
 

@@ -26,7 +26,7 @@ Cpu::Cpu(std::string name, int frequency, int cores, int threads, int power) {
 	std::cout << "CPU '" << name << "' was created.\n";
 }
 Cpu::~Cpu() {
-	std::cout << "CPU '" << name << "' was removed.\n";
+	//std::cout << "CPU '" << name << "' was removed.\n";
 }
 
 std::string Cpu::getName() {
@@ -66,4 +66,24 @@ void Cpu::setPower(int power) {
 
 std::string Cpu::ParamsToString() {
 	return name + ", " + std::to_string(frequency) + " Ghz, " + std::to_string(cores) + " cores, " + std::to_string(threads) + " threads, " + std::to_string(power) + " W.";
+}
+
+Cpu& Cpu::operator++ () {
+	frequency += frequency;
+	cores += cores;
+	threads += threads;
+	power += power;
+	return *this;
+}
+Cpu& Cpu::operator++ (int) {
+	Cpu cpu = *this;
+	++*this;
+	return cpu;
+}
+Cpu& Cpu::operator=(Cpu& cpu) {
+	frequency = cpu.frequency;
+	cores = cpu.cores;
+	threads = cpu.threads;
+	power = cpu.power;
+	return *this;
 }

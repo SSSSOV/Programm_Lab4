@@ -23,7 +23,7 @@ Gpu::Gpu(std::string name, int frequency, int memory, int power) {
 	std::cout << "GPU '" << name << "' was created.\n";
 }
 Gpu::~Gpu() {
-	std::cout << "GPU '" << name << "' was removed.\n";
+	//std::cout << "GPU '" << name << "' was removed.\n";
 }
 
 std::string Gpu::getName() {

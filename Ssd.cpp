@@ -23,7 +23,7 @@ Ssd::Ssd(std::string name, int speed, int memory, int power) {
 	std::cout << "SSD '" << name << "' was created.\n";
 }
 Ssd::~Ssd() {
-	std::cout << "RAM '" << name << "' was removed.\n";
+	//std::cout << "RAM '" << name << "' was removed.\n";
 }
 
 std::string Ssd::getName() {

@@ -23,7 +23,7 @@ Ram::Ram(std::string name, int frequency, int memory, int power) {
 	std::cout << "RAM '" << name << "' was created.\n";
 }
 Ram::~Ram() {
-	std::cout << "RAM '" << name << "' was removed.\n";
+	//std::cout << "RAM '" << name << "' was removed.\n";
 }
 
 std::string Ram::getName() {

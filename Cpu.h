@@ -30,5 +30,9 @@ public:
 	void setPower(int power);
 
 	std::string ParamsToString();
+
+	Cpu& operator++ ();
+	Cpu& operator++(int);
+	Cpu& operator= (Cpu& cpu);
 };
 
