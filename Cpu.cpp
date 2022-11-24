@@ -8,6 +8,8 @@ Cpu::Cpu() {
 	threads = 1;
 	power = 10;
 	std::cout << "CPU '" << name << "' was created with defoult params.\n";
+	amount++;
+	id = amount;
 }
 Cpu::Cpu(std::string name) {
 	this->name = name;
@@ -16,6 +18,8 @@ Cpu::Cpu(std::string name) {
 	threads = 1;
 	power = 10;
 	std::cout << "CPU '" << name << "' was created with defoult params.\n";
+	amount++;
+	id = amount;
 }
 Cpu::Cpu(std::string name, int frequency, int cores, int threads, int power) {
 	this->name = name;
@@ -24,9 +28,20 @@ Cpu::Cpu(std::string name, int frequency, int cores, int threads, int power) {
 	this->threads = threads;
 	this->power = power;
 	std::cout << "CPU '" << name << "' was created.\n";
+	amount++;
+	id = amount;
 }
 Cpu::~Cpu() {
-	//std::cout << "CPU '" << name << "' was removed.\n";
+	//amount--;
+}
+
+int Cpu::getId(int& id) {
+	id = this->id;
+	return this->id;
+}
+int Cpu::getId(int* id) {
+	*id = this->id;
+	return this->id;
 }
 
 std::string Cpu::getName() {
@@ -65,9 +80,13 @@ void Cpu::setPower(int power) {
 }
 
 std::string Cpu::ParamsToString() {
-	return name + ", " + std::to_string(frequency) + " Ghz, " + std::to_string(cores) + " cores, " + std::to_string(threads) + " threads, " + std::to_string(power) + " W.";
+	return "#" + std::to_string(id) + " " + name + ", " + std::to_string(frequency) + " Ghz, " + std::to_string(cores) + " cores, " + std::to_string(threads) + " threads, " + std::to_string(power) + " W.";
 }
 
+Cpu Cpu::operator+(const Cpu& cpu) {
+	Cpu temp(this->name + "+" + cpu.name, this->frequency + cpu.frequency, this->cores + cpu.cores, this->threads + cpu.threads, this->power + cpu.power);
+	return temp;
+}
 Cpu& Cpu::operator++ () {
 	frequency += frequency;
 	cores += cores;
@@ -86,4 +105,8 @@ Cpu& Cpu::operator=(Cpu& cpu) {
 	threads = cpu.threads;
 	power = cpu.power;
 	return *this;
+}
+
+int Cpu::getAmount() {
+	return amount;
 }

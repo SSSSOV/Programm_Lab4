@@ -133,6 +133,7 @@
     <ClCompile Include="Programm_Lab4.cpp" />
     <ClCompile Include="Ram.cpp" />
     <ClCompile Include="Ssd.cpp" />
+    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cpu.h" />
@@ -140,6 +141,7 @@
     <ClInclude Include="Pc.h" />
     <ClInclude Include="Ram.h" />
     <ClInclude Include="Ssd.h" />
+    <ClInclude Include="test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

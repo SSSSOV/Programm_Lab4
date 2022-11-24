@@ -2,6 +2,8 @@
 #include <string>
 class Cpu {
 private:
+	static int amount;
+	int id;
 	std::string name;
 	int frequency;
 	int cores;
@@ -9,10 +11,14 @@ private:
 	int power;
 
 public:
+
 	Cpu();
 	Cpu(std::string name);
 	Cpu(std::string name, int frequency, int cores, int threads, int power);
 	~Cpu();
+
+	int getId(int&);
+	int getId(int*);
 
 	std::string getName();
 	void setName(std::string name);
@@ -31,8 +37,14 @@ public:
 
 	std::string ParamsToString();
 
+	Cpu operator+ (const Cpu&);
 	Cpu& operator++ ();
-	Cpu& operator++(int);
-	Cpu& operator= (Cpu& cpu);
+	Cpu& operator++ (int);
+	Cpu& operator= (Cpu&);
+
+	static int getAmount();
+
+	friend void setId(Cpu& cpu, int newId);
 };
+
 
