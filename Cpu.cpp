@@ -88,6 +88,7 @@ Cpu Cpu::operator+(const Cpu& cpu) {
 	return temp;
 }
 Cpu& Cpu::operator++ () {
+	name = "(" + name + ")++";
 	frequency += frequency;
 	cores += cores;
 	threads += threads;

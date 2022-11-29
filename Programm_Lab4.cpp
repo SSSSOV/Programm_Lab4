@@ -29,7 +29,7 @@ int main() {
 	cpu2.getId(&id);
 	std::cout << "'Cpu2' id: " << id << "\t// Id changed using friend function." << std::endl;
 
-	std::cout << "\n(7) Friend function: " << std::endl;
+	std::cout << "\n(7) Overloads: " << std::endl;
 	std::cout << cpu1.ParamsToString() << "\t// Params 'cpu1'." << std::endl;
 	std::cout << cpu2.ParamsToString() << "\t// Params 'cpu2'." << std::endl;
 	Cpu cpu3 = cpu1 + cpu2;
