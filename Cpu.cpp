@@ -23,10 +23,38 @@ Cpu::Cpu(std::string name) {
 }
 Cpu::Cpu(std::string name, int frequency, int cores, int threads, int power) {
 	this->name = name;
-	this->frequency = frequency;
-	this->cores = cores;
-	this->threads = threads;
-	this->power = power;
+	try {
+		if (frequency < 1) throw "InvalidFrequency";
+		this->frequency = frequency;
+	}
+	catch (const char* e) {
+		std::cout << "Error! " << e << ".\n";
+		this->frequency = 1000;
+	}
+	try {
+		if (cores < 1) throw "InvalidCores";
+		this->cores = cores;
+	}
+	catch (const char* e) {
+		std::cout << "Error! " << e << ".\n";
+		this->cores = 1;
+	}
+	try {
+		if (threads < 1) throw "InvalidThreads";
+		this->threads = threads;
+	}
+	catch (const char* e) {
+		std::cout << "Error! " << e << ".\n";
+		this->threads = 1;
+	}
+	try {
+		if (power < 1) throw "InvalidPower";
+		this->power = power;
+	}
+	catch (const char* e) {
+		std::cout << "Error! " << e << ".\n";
+		this->power = 10;
+	}
 	std::cout << "CPU '" << name << "' was created.\n";
 	amount++;
 	id = amount;
@@ -55,28 +83,60 @@ int Cpu::getFrequency() {
 	return frequency;
 }
 void Cpu::setFrequency(int frequency) {
-	this->frequency = frequency;
+	try {
+		if (frequency < 1) throw "InvalidFrequency";
+		this->frequency = frequency;
+		std::cout << "Frequency value was changed.\n";
+	}
+	catch (const char* e) {
+		std::cout << "Error! " << e << ".\n";
+		std::cout << "Frequency value has not changed.\n";
+	}
 }
 
 int Cpu::getCores() {
 	return cores;
 }
 void Cpu::setCores(int cores) {
-	this->cores = cores;
+	try {
+		if (cores < 1) throw "InvalidCores";
+		this->cores = cores;
+		std::cout << "Cores value was changed.\n";
+	}
+	catch (const char* e) {
+		std::cout << "Error! " << e << ".\n";
+		std::cout << "Cores value has not changed.\n";
+	}
 }
 
 int Cpu::getThreads() {
 	return threads;
 }
 void Cpu::setThreads(int threads) {
-	this->threads = threads;
+	try {
+		if (threads < 1) throw "InvalidThreads";
+		this->threads = threads;
+		std::cout << "Threads value was changed.\n";
+	}
+	catch (const char* e) {
+		std::cout << "Error! " << e << ".\n";
+		std::cout << "Threads value has not changed.\n";
+	}
 }
 
 int Cpu::getPower() {
 	return power;
 }
 void Cpu::setPower(int power) {
-	this->power = power;
+	try {
+		if (power < 1) throw "InvalidPower";
+		this->power = power;
+		std::cout << "Power value was changed.\n";
+	}
+	catch (const char* e) {
+		std::cout << "Error! " << e << ".\n";
+		std::cout << "Power value has not changed.\n";
+	}
 }
 
 std::string Cpu::ParamsToString() {
