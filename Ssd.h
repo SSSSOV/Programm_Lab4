@@ -1,11 +1,11 @@
 #pragma once
 #include <string>
-class Ssd {
+#include "Part.h"
+
+class Ssd: public Part {
 private:
-	std::string name;
 	int speed;
 	int memory;	
-	int power;
 
 public:
 	Ssd();
@@ -13,18 +13,17 @@ public:
 	Ssd(std::string name, int speed, int memory, int power);
 	~Ssd();
 
-	std::string getName();
-	void setName(std::string name);
-
 	int getSpeed();
 	void setSpeed(int speed);
 
 	int getMemory();
 	void setMemory(int memory);
 
-	int getPower();
-	void setPower(int power);
-
 	std::string ParamsToString();
-};
+	friend void operator << (std::ostream&, Ssd);
+	friend Ssd operator >> (std::istream&, Ssd&);
 
+	void operator= (Part*);
+
+	int Benchmark();
+};

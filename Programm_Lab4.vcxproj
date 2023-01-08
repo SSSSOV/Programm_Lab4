@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Cpu.cpp" />
     <ClCompile Include="Gpu.cpp" />
+    <ClCompile Include="Part.cpp" />
     <ClCompile Include="Pc.cpp" />
     <ClCompile Include="Programm_Lab4.cpp" />
     <ClCompile Include="Ram.cpp" />
@@ -138,6 +139,7 @@
   <ItemGroup>
     <ClInclude Include="Cpu.h" />
     <ClInclude Include="Gpu.h" />
+    <ClInclude Include="Part.h" />
     <ClInclude Include="Pc.h" />
     <ClInclude Include="Ram.h" />
     <ClInclude Include="Ssd.h" />

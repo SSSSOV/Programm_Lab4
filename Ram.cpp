@@ -1,36 +1,23 @@
 #include "Ram.h"
 #include <iostream>
 
-Ram::Ram() {
-	name = "defoultRAM";
+Ram::Ram() : Part("defaultRAM", 10) {
 	frequency = 1000;
 	memory = 1;
-	power = 10;
-	std::cout << "RAM '" << name << "' was created with defoult params.\n";
+	std::cout << "RAM '" << name << "' was created with default params.\n";
 }
-Ram::Ram(std::string name) {
-	this->name = name;
+Ram::Ram(std::string name) : Part(name, 10) {
 	frequency = 1000;
 	memory = 1;
-	power = 10;
-	std::cout << "RAM '" << name << "' was created with defoult params.\n";
+	std::cout << "RAM '" << name << "' was created with default params.\n";
 }
-Ram::Ram(std::string name, int frequency, int memory, int power) {
-	this->name = name;
+Ram::Ram(std::string name, int frequency, int memory, int power) : Part(name, power) {
 	this->frequency = frequency;
 	this->memory = memory;
-	this->power = power;
 	std::cout << "RAM '" << name << "' was created.\n";
 }
 Ram::~Ram() {
 	//std::cout << "RAM '" << name << "' was removed.\n";
-}
-
-std::string Ram::getName() {
-	return name;
-}
-void Ram::setName(std::string name) {
-	this->name = name;
 }
 
 int Ram::getFrequency() {
@@ -47,13 +34,24 @@ void Ram::setMemory(int memory) {
 	this->memory = memory;
 }
 
-int Ram::getPower() {
-	return power;
+std::string Ram::ParamsToString() {
+	return "#" + std::to_string(id) + " " + name + ", " + std::to_string(frequency) + " Ghz, " + std::to_string(memory) + " Gb, " + std::to_string(power) + " W.";
 }
-void Ram::setPower(int power) {
-	this->power = power;
+void operator << (std::ostream& o, Ram ram) {
+	std::cout << ram.ParamsToString() + "\n";
+}
+Ram operator >> (std::istream& o, Ram& ram) {
+	std::cin >> ram.name >> ram.frequency >> ram.memory >> ram.power;
+	return ram;
 }
 
-std::string Ram::ParamsToString() {
-	return name + ", " + std::to_string(frequency) + " Ghz, " + std::to_string(memory) + " Gb, " + std::to_string(power) + " W.";
+void Ram::operator=(Part* part) {
+	name = part->getName();
+	frequency = 1000;
+	memory = 1;
+	power = part->getPower();
+}
+
+int Ram::Benchmark() {
+	return frequency * memory;
 }

@@ -1,11 +1,11 @@
 #pragma once
 #include <string>
-class Gpu {
+#include "Part.h"
+
+class Gpu: public Part {
 private:
-	std::string name;	
 	int frequency;	
 	int memory;
-	int power;
 
 public:
 	Gpu();
@@ -13,18 +13,17 @@ public:
 	Gpu(std::string name, int frequency, int memory, int power);
 	~Gpu();
 
-	std::string getName();
-	void setName(std::string name);
-
 	int getFrequency();
 	void setFrequency(int frequency);
 
 	int getMemory();
 	void setMemory(int memory);
 
-	int getPower();
-	void setPower(int power);
-
 	std::string ParamsToString();
-};
+	friend void operator << (std::ostream&, Gpu);
+	friend Gpu operator >> (std::istream&, Gpu&);
 
+	void operator= (Part*);
+
+	int Benchmark();
+};

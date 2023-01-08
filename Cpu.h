@@ -1,27 +1,19 @@
 #pragma once
 #include <string>
-class Cpu {
+#include "Part.h"
+
+class Cpu: public Part {
 private:
-	static int amount;
-	int id;
-	std::string name;
 	int frequency;
 	int cores;
 	int threads;
-	int power;
+
 
 public:
-
 	Cpu();
 	Cpu(std::string name);
 	Cpu(std::string name, int frequency, int cores, int threads, int power);
 	~Cpu();
-
-	int getId(int&);
-	int getId(int*);
-
-	std::string getName();
-	void setName(std::string name);
 
 	int getFrequency();
 	void setFrequency(int frequency);
@@ -32,19 +24,15 @@ public:
 	int getThreads();
 	void setThreads(int threads);
 
-	int getPower();
-	void setPower(int power);
-
 	std::string ParamsToString();
+	friend void operator << (std::ostream&, Cpu);
+	friend Cpu operator >> (std::istream&, Cpu&);
 
 	Cpu operator+ (const Cpu&);
 	Cpu& operator++ ();
 	Cpu& operator++ (int);
 	Cpu& operator= (Cpu&);
+	void operator= (Part*);
 
-	static int getAmount();
-
-	friend void setId(Cpu& cpu, int newId);
+	int Benchmark();
 };
-
-

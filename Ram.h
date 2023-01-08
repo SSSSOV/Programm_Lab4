@@ -1,11 +1,11 @@
 #pragma once
 #include <string>
-class Ram {
+#include "Part.h"
+
+class Ram: public Part {
 private:
-	std::string name;
 	int frequency;	
 	int memory;		
-	int power;
 
 public:
 	Ram();
@@ -13,18 +13,17 @@ public:
 	Ram(std::string name, int frequency, int memory, int power);
 	~Ram();
 
-	std::string getName();
-	void setName(std::string name);
-
 	int getFrequency();
 	void setFrequency(int frequency);
 
 	int getMemory();
 	void setMemory(int memory);
 
-	int getPower();
-	void setPower(int power);
-
 	std::string ParamsToString();
-};
+	friend void operator << (std::ostream&, Ram);
+	friend Ram operator >> (std::istream&, Ram&);
 
+	void operator= (Part*);
+
+	int Benchmark();
+};

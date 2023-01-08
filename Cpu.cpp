@@ -1,28 +1,19 @@
 #include "Cpu.h"
 #include <iostream>
 
-Cpu::Cpu() {
-	name = "defoultCPU";
+Cpu::Cpu() : Part("defaultCPU", 10) {
 	frequency = 1000;
 	cores = 1;
 	threads = 1;
-	power = 10;
-	std::cout << "CPU '" << name << "' was created with defoult params.\n";
-	amount++;
-	id = amount;
+	std::cout << "CPU '" << name << "' was created with default params.\n";
 }
-Cpu::Cpu(std::string name) {
-	this->name = name;
+Cpu::Cpu(std::string name) : Part(name, 10) {
 	frequency = 1000;
 	cores = 1;
 	threads = 1;
-	power = 10;
-	std::cout << "CPU '" << name << "' was created with defoult params.\n";
-	amount++;
-	id = amount;
+	std::cout << "CPU '" << name << "' was created with default params.\n";
 }
-Cpu::Cpu(std::string name, int frequency, int cores, int threads, int power) {
-	this->name = name;
+Cpu::Cpu(std::string name, int frequency, int cores, int threads, int power) : Part(name, power) {
 	try {
 		if (frequency < 1) throw "InvalidFrequency";
 		this->frequency = frequency;
@@ -47,36 +38,10 @@ Cpu::Cpu(std::string name, int frequency, int cores, int threads, int power) {
 		std::cout << "Error! " << e << ".\n";
 		this->threads = 1;
 	}
-	try {
-		if (power < 1) throw "InvalidPower";
-		this->power = power;
-	}
-	catch (const char* e) {
-		std::cout << "Error! " << e << ".\n";
-		this->power = 10;
-	}
 	std::cout << "CPU '" << name << "' was created.\n";
-	amount++;
-	id = amount;
 }
 Cpu::~Cpu() {
 	//amount--;
-}
-
-int Cpu::getId(int& id) {
-	id = this->id;
-	return this->id;
-}
-int Cpu::getId(int* id) {
-	*id = this->id;
-	return this->id;
-}
-
-std::string Cpu::getName() {
-	return name;
-}
-void Cpu::setName(std::string name) {
-	this->name = name;
 }
 
 int Cpu::getFrequency() {
@@ -124,23 +89,15 @@ void Cpu::setThreads(int threads) {
 	}
 }
 
-int Cpu::getPower() {
-	return power;
-}
-void Cpu::setPower(int power) {
-	try {
-		if (power < 1) throw "InvalidPower";
-		this->power = power;
-		std::cout << "Power value was changed.\n";
-	}
-	catch (const char* e) {
-		std::cout << "Error! " << e << ".\n";
-		std::cout << "Power value has not changed.\n";
-	}
-}
-
 std::string Cpu::ParamsToString() {
 	return "#" + std::to_string(id) + " " + name + ", " + std::to_string(frequency) + " Ghz, " + std::to_string(cores) + " cores, " + std::to_string(threads) + " threads, " + std::to_string(power) + " W.";
+}
+void operator << (std::ostream& o, Cpu cpu) {
+	std::cout << cpu.ParamsToString() + "\n";
+}
+Cpu operator >> (std::istream& o, Cpu& cpu) {
+	std::cin >> cpu.name >> cpu.frequency >> cpu.cores >> cpu.threads >> cpu.power;
+	return cpu;
 }
 
 Cpu Cpu::operator+(const Cpu& cpu) {
@@ -168,6 +125,14 @@ Cpu& Cpu::operator=(Cpu& cpu) {
 	return *this;
 }
 
-int Cpu::getAmount() {
-	return amount;
+void Cpu::operator=(Part* part) {
+	name = part->getName();
+	frequency = 1000;
+	cores = 1;
+	threads = 1;
+	power = part->getPower();
+}
+
+int Cpu::Benchmark() {
+	return frequency * threads;
 }

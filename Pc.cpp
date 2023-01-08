@@ -67,7 +67,7 @@ void Pc::InfoPC() {
 	std::cout << ssd->ParamsToString() << std::endl << std::endl;
 }
 int Pc::Benchmark() {
-	return cpu->getFrequency() * cpu->getCores() + gpu->getFrequency() * gpu->getMemory() + ram->getFrequency() * ram->getMemory() + ssd->getSpeed();
+	return cpu->Benchmark() + gpu->Benchmark() + ram->Benchmark() + ssd->Benchmark();
 }
 int Pc::Consumption() {
 	return cpu->getPower() + gpu->getPower() + ram->getPower() + ssd->getPower();

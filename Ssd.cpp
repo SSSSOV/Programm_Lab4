@@ -1,36 +1,23 @@
 #include "Ssd.h"
 #include <iostream>
 
-Ssd::Ssd() {
-	name = "defoultSSD";
+Ssd::Ssd() : Part("defaultSSD", 10) {
 	speed = 1000;
 	memory = 1;
-	power = 10;
-	std::cout << "SSD '" << name << "' was created with defoult params.\n";
+	std::cout << "SSD '" << name << "' was created with default params.\n";
 }
-Ssd::Ssd(std::string name) {
-	this->name = name;
+Ssd::Ssd(std::string name) : Part(name, 10) {
 	speed = 1000;
 	memory = 1;
-	power = 10;
-	std::cout << "SSD '" << name << "' was created with defoult params.\n";
+	std::cout << "SSD '" << name << "' was created with default params.\n";
 }
-Ssd::Ssd(std::string name, int speed, int memory, int power) {
-	this->name = name;
+Ssd::Ssd(std::string name, int speed, int memory, int power) : Part(name, power) {
 	this->speed = speed;
 	this->memory = memory;
-	this->power = power;
 	std::cout << "SSD '" << name << "' was created.\n";
 }
 Ssd::~Ssd() {
 	//std::cout << "RAM '" << name << "' was removed.\n";
-}
-
-std::string Ssd::getName() {
-	return name;
-}
-void Ssd::setName(std::string name) {
-	this->name = name;
 }
 
 int Ssd::getSpeed() {
@@ -47,13 +34,24 @@ void Ssd::setMemory(int memory) {
 	this->memory = memory;
 }
 
-int Ssd::getPower() {
-	return power;
+std::string Ssd::ParamsToString() {
+	return "#" + std::to_string(id) + " " + name + ", " + std::to_string(speed) + " Mb\\s, " + std::to_string(memory) + " Gb, " + std::to_string(power) + " W.";
 }
-void Ssd::setPower(int power) {
-	this->power = power;
+void operator << (std::ostream& o, Ssd ssd) {
+	std::cout << ssd.ParamsToString() + "\n";
+}
+Ssd operator >> (std::istream& o, Ssd& ssd) {
+	std::cin >> ssd.name >> ssd.speed >> ssd.memory >> ssd.power;
+	return ssd;
 }
 
-std::string Ssd::ParamsToString() {
-	return name + ", " + std::to_string(speed) + " Mb\\s, " + std::to_string(memory) + " Gb, " + std::to_string(power) + " W.";
+void Ssd::operator=(Part* part) {
+	name = part->getName();
+	speed = 1000;
+	memory = 1;
+	power = part->getPower();
+}
+
+int Ssd::Benchmark() {
+	return speed;
 }

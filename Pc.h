@@ -32,4 +32,3 @@ public:
 	int Benchmark();
 	int Consumption();
 };
-
