@@ -63,6 +63,13 @@ Part operator >> (std::istream& o, Part& part){
 	return part;
 }
 
+bool Part::operator < (const Part  & part) {
+	return this->power < part.power;
+}
+bool Part::operator == (const Part & part) {
+	return this->name == part.name;
+}
+
 int Part::getAmount() {
 	return amount;
 }

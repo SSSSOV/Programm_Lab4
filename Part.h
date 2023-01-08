@@ -24,7 +24,8 @@ public:
 	std::string ParamsToString();
 	friend void operator << (std::ostream&, Part);
 	friend Part operator >> (std::istream&, Part&);
-
+	bool operator < (const Part&);
+	bool operator == (const Part&);
 	static int getAmount();
 
 	virtual int Benchmark();

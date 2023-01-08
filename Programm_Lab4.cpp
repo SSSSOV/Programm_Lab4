@@ -1,4 +1,6 @@
 ﻿#include <iostream>
+#include <algorithm>
+#include <list>
 #include "Cpu.h"
 #include "Gpu.h"
 #include "Ram.h"
@@ -72,7 +74,7 @@ public:
 };
 
 int main() {
-	std::cout << "\tOverload method ParamsToString():" << "\n\n";
+	/*std::cout << "\tOverload method ParamsToString():" << "\n\n";
 	Cpu* cpu1 = new Cpu();
 	std::cout << cpu1->ParamsToString() << "\n\n";
 	std::cout << cpu1->Part::ParamsToString() << "\n\n";
@@ -114,5 +116,31 @@ int main() {
 	std::cout << "Amount items in storage:" << storage.getAmount() << "\n";
 	storage.push(*cpu2);
 	std::cout << "Amount items in storage:" << storage.getAmount() << "\n";
-	storage.push(*ssd1);
+	storage.push(*ssd1);*/
+	std::list<Part> list_of_parts;
+	std::list<Part>::iterator i;
+
+	Part* part1 = new Part();
+	Cpu* cpu1 = new Cpu("SomeCPU", 1000, 10, 20, 100);
+	list_of_parts.push_back(*cpu1);
+	list_of_parts.push_back(*part1);
+
+	std::cout << "\n\tItems in list:\n";
+	for (i = list_of_parts.begin(); i != list_of_parts.end(); ++i) {
+		std::cout << *i;
+	}
+	list_of_parts.sort();
+	std::cout << "\n\tItems in list after sorting:\n";
+	for (i = list_of_parts.begin(); i != list_of_parts.end(); ++i) {
+		std::cout << *i;
+	}
+	std::cout << "\n\tSearch in list:\n";
+	i = std::find(list_of_parts.begin(), list_of_parts.end(), Part("defaultPart", 0));
+	if (i != list_of_parts.end()) {
+		std::cout << "Found element: ";
+		std::cout << *i;
+		std::cout << std::endl;
+	}
+	else
+		std::cout << "Item not Found" << std::endl;
 }
